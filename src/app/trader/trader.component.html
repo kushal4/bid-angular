@@ -25,7 +25,7 @@
                         <input type="text" #prodInp [className]="!canBidPlace && product.value.id==currProdId && prodInp.value!='' ? 'border border-danger' : '' ">
                         <i [className]="!canBidPlace && product.value.id==currProdId && prodInp.value!='' ? 'd-inline-block fa fa-exclamation-circle ' : 'd-none'" aria-hidden="true " placement="top" ngbTooltip="You can't add this bid"></i>
                         <span class=" input-group-btn ">
-                      <button class="btn btn-primary btn-gap " (click)="save(prodInp,product.value.bids,product) ">Add Product</button>
+                      <button class="btn btn-primary btn-gap " (click)="save(prodInp,product.value.bids,product) ">Place Bid</button>
                   </span>
 
                     </div>
