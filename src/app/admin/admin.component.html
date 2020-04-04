@@ -1,1 +1,42 @@
-<p>admin works!</p>
+<bs-navbar></bs-navbar>
+<div class="bid-container">
+    <div class="input-group">
+        <input type="text" #prodInp class="bid-input" [(ngModel)]="product.name">
+        <span class=" input-group-btn ">
+          <button class="btn btn-primary bid-btn " (click)="save(prodInp) ">Add Product</button>
+    </span>
+    </div>
+
+    <table class="table table-bordered table-gap ">
+        <thead>
+            <tr class="text-center">
+                <th>Name</th>
+                <th>Bids</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products | keyvalue ">
+                <td class="text-center">{{product.value.name}}</td>
+                <ng-template #emptytD>
+                    <td></td>
+                </ng-template>
+                <td *ngIf="product.value.bids.length >0 ;else emptytD">
+                    <span *ngFor="let bid of product.value.bids | keyvalue" class="product-bids-cont">
+                      <ng-container *ngIf="!(bid.value.is_finalized);else finalized">
+                        <i class="fa fa-check assert-color" (click)="finalizeBid(bid,product)" aria-hidden="true "></i>
+                        <strong>{{bid.value.price}}</strong>
+                        <i class="fa fa-close negate-color" (click)="deleteBid(bid,product)" aria-hidden="true "></i>
+                      </ng-container>
+                      <ng-template #finalized>
+                        <strong class="text-center">{{bid.value.price}}</strong>
+                      </ng-template>
+                      </span>
+
+                </td>
+                <td><i class="fa fa-trash ml-auto cursor-pointer" (click)="deleteProduct(product)" aria-hidden="true "></i></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

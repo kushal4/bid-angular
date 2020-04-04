@@ -1,7 +1,7 @@
 import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import * as jwt_decode from "jwt-decode";
+
 
 @Component({
   selector: 'app-login',
@@ -11,11 +11,11 @@ import * as jwt_decode from "jwt-decode";
 export class LoginComponent implements OnInit {
 
 signIn={
-    "email":null,
+    "username":null,
     "password":null
   };
   errorMsg={
-    "email":null,
+    "username":null,
     "password":null
   };
   show=false;
@@ -26,26 +26,38 @@ signIn={
   }
 
   Login(loginObj){
-    let returnUrl=this.route.snapshot.paramMap.get('returnUrl') || '/movie-home';
-    let login$=this.authService.login(loginObj);
+    //let returnUrl=this.route.snapshot.paramMap.get('returnUrl') || '/movie-home';
+    let loginP=this.authService.login(loginObj);
     this.show=true;
-    login$.subscribe(response=>{
-      this.errorMsg={ "email":null,
+    let admin_url="/admin";
+    let trader_url="/trader";
+    let returnUrl="";
+    loginP.then(auth_response=>{
+      this.errorMsg={ "username":null,
       "password":null};
       this.show=false;
       try {
-        let code = response["code"];
+        let code = auth_response["code"];
+        //console.log(code);
         if (code == 200) {
-          if (response.hasOwnProperty("access_token")) {
-            let token=response["access_token"];
-            let decode_token=jwt_decode(token);
+          if (auth_response.hasOwnProperty("access_token")) {
+            let token=auth_response["access_token"];
+            let decode_token=this.authService.decodeToken(token);
             console.log(decode_token);
-            localStorage.setItem("access_token", token);
-            this.router.navigate([returnUrl]);
+            this.authService.setToken(token);
+            let role=decode_token["role"];
+            if(role=="Admin"){
+              returnUrl=admin_url;
+            }else{
+              returnUrl=trader_url;
+            }
+
+           this.router.navigate([returnUrl]);
           }
         }else{
-          if(response.hasOwnProperty("errors")){
-              this.errorMsg=response["errors"];
+          if(auth_response.hasOwnProperty("errors")){
+            //console.log(auth_response["errors"]);
+              this.errorMsg=auth_response["errors"];
               console.log(this.errorMsg);
           }
         }

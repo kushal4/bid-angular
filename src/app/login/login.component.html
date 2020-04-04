@@ -5,15 +5,15 @@
         <!-- form card login -->
         <div class="card rounded-0">
             <div class="card-header" align="center">
-                <h3 class="mb-0">Sign in to 6MoviesClub</h3>
+                <h3 class="mb-0">Sign in</h3>
             </div>
             <div class="card-body">
                 <form class="sign-form" #f="ngForm">
                     <div class="form-group row no-gutters form-input">
-                        <label for="email">Email</label>
-                        <input type="text" id="email" name="email" #email="ngModel" [(ngModel)]="signIn.email" class="form-control" required>
-                        <div class="alert alert-danger mt-1 block" *ngIf="errorMsg.email ">
-                            {{ errorMsg.email }}
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" #email="ngModel" [(ngModel)]="signIn.username" class="form-control" required>
+                        <div class="alert alert-danger mt-1 block" *ngIf="errorMsg.username ">
+                            {{ errorMsg.username}}
                         </div>
                     </div>
                     <div class="form-group row no-gutters form-input">

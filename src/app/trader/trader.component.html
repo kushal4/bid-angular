@@ -1,1 +1,36 @@
-<p>trader works!</p>
+<bs-navbar></bs-navbar>
+
+<div class="container">
+    <table class="table table-bordered table-gap table-condensed">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Bids</th>
+                <th>Placing Bid</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products | keyvalue ">
+                <td class="text-center">{{product.value.name}}</td>
+                <ng-template #emptytD>
+                    <td></td>
+                </ng-template>
+                <td *ngIf="product.value.bids.length >0 ; else emptytD">
+                    <select class="form-control">
+                    <option *ngFor="let bid of product.value.bids | keyvalue"  value="bid.value.id">{{bid.value.price}}</option>
+                </select>
+                </td>
+                <td>
+                    <div class="input-group">
+                        <input type="text" #prodInp [className]="!canBidPlace && product.value.id==currProdId && prodInp.value!='' ? 'border border-danger' : '' ">
+                        <i [className]="!canBidPlace && product.value.id==currProdId && prodInp.value!='' ? 'd-inline-block fa fa-exclamation-circle ' : 'd-none'" aria-hidden="true " placement="top" ngbTooltip="You can't add this bid"></i>
+                        <span class=" input-group-btn ">
+                      <button class="btn btn-primary btn-gap " (click)="save(prodInp,product.value.bids,product) ">Add Product</button>
+                  </span>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,14 @@
+.table-gap {
+    margin-top: 8%;
+}
+
+.btn-gap {
+    margin-left: 10%;
+    white-space: nowrap;
+}
+
+.invalid::after {
+    content: "!";
+    font-weight: bolder;
+    color: red;
+}
