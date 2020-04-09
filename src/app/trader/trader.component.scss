@@ -1,3 +1,4 @@
+@import "../../variables.scss";
 .table-gap {
     margin-top: 8%;
 }
@@ -10,5 +11,5 @@
 .invalid::after {
     content: "!";
     font-weight: bolder;
-    color: red;
+    color: $crossColor;
 }

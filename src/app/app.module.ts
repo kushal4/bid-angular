@@ -1,3 +1,4 @@
+import { RoleAuthGuard } from './role-auth-guard.service';
 import { AuthInterceptor } from './interceptors/AuthInterceptor';
 import { AdminBidService } from './admin-bid.service';
 import { BidService } from './bid.service';
@@ -28,8 +29,8 @@ import { environment } from '../environments/environment';
 const routes=[
   {path:"",component:LoginComponent},
   {path:"login",component:LoginComponent},
-   {path:"admin",component:AdminComponent, "canActivate":[AuthGuard]},
-   {path:"trader",component:TraderComponent, "canActivate":[AuthGuard]}
+   {path:"admin",component:AdminComponent, "canActivate":[AuthGuard,RoleAuthGuard]},
+   {path:"trader",component:TraderComponent, "canActivate":[AuthGuard,RoleAuthGuard]}
 ]
 
 const config: SocketIoConfig = { url: 'http://localhost:4444', options: {} };
@@ -55,7 +56,7 @@ const config: SocketIoConfig = { url: 'http://localhost:4444', options: {} };
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [BidService,AdminBidService,
-    AuthGuard,
+    AuthGuard,RoleAuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })

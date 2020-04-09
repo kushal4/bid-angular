@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { BidService } from './../bid.service';
 import { Component, OnInit } from '@angular/core';
 import { AdminBidService } from '../admin-bid.service';
@@ -12,13 +13,19 @@ export class AdminComponent implements OnInit {
   product={
       name:null
   }
-  constructor(private productService:AdminBidService,private bidService:BidService) { }
+
+  role="";
+  constructor(private productService:AdminBidService,private bidService:BidService,private authService:AuthService) { }
 
 
   async ngOnInit(): Promise<void> {
+
     try{
+      //let decoded_token=this.authService.decodeToken();
+      //this.role=decoded_token["role"];
       let products_obj= await this.bidService.getProductBids();
       this.products=products_obj["products"];
+      console.log(this.products);
     }catch(ex){
       console.log(ex);
     }
@@ -26,11 +33,15 @@ export class AdminComponent implements OnInit {
   }
 
 
+  //Unit testing scenarios
+  //1 expects input element
  async save(prodInput : HTMLInputElement){
-   console.log(this.product);
+  // console.log(this.product);
    prodInput.value="";
    try{
     let products_obj =await this.productService.saveProduct(this.product)
+    //console.log("in save");
+    //console.log(products_obj);
     this.products=products_obj["products"];
    }catch(ex){
      console.log(ex);
@@ -60,11 +71,11 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  async deleteProduct(product){
-    const product_id=product["value"]["id"];
-    console.log(product_id);
+  async deleteProduct(productId){
+    //const product_id=product["value"]["id"];
+  // console.log(productId);
     try{
-      this.products=await this.productService.removeProduct(product_id);
+      this.products=await this.productService.removeProduct(productId);
     }catch(ex){
       console.error(ex);
     }

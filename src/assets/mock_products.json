@@ -1,0 +1,82 @@
+{
+    "code": 200,
+    "products": [{
+            "id": 1,
+            "name": "2s",
+            "bids": [{
+                    "id": 1,
+                    "user_id": 4,
+                    "product_id": 1,
+                    "price": 23,
+                    "is_finalized": false
+                },
+                {
+                    "id": 2,
+                    "user_id": 3,
+                    "product_id": 1,
+                    "price": 34,
+                    "is_finalized": false
+                },
+                {
+                    "id": 3,
+                    "user_id": 3,
+                    "product_id": 1,
+                    "price": 45,
+                    "is_finalized": false
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "sd",
+            "bids": [{
+                    "id": 1,
+                    "user_id": 3,
+                    "product_id": 2,
+                    "price": 23,
+                    "is_finalized": false
+                },
+                {
+                    "id": 2,
+                    "price": 34,
+                    "user_id": 3,
+                    "product_id": 2,
+                    "is_finalized": false
+                },
+                {
+                    "id": 3,
+                    "price": 45,
+                    "user_id": 3,
+                    "product_id": 2,
+                    "is_finalized": false
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Ssdf",
+            "bids": [{
+                    "id": 1,
+                    "price": 23,
+                    "user_id": 3,
+                    "product_id": 3,
+                    "is_finalized": false
+                },
+                {
+                    "id": 2,
+                    "price": 34,
+                    "user_id": 3,
+                    "product_id": 3,
+                    "is_finalized": false
+                },
+                {
+                    "id": 3,
+                    "price": 45,
+                    "user_id": 3,
+                    "product_id": 3,
+                    "is_finalized": false
+                }
+            ]
+        }
+    ]
+}

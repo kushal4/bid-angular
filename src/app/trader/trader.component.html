@@ -1,7 +1,8 @@
 <bs-navbar></bs-navbar>
 
 <div class="container">
-    <table class="table table-bordered table-gap table-condensed">
+    <!-- <span>{{products | json}}</span> -->
+    <table id="" class="table table-bordered table-gap table-condensed trader-tble">
         <thead>
             <tr>
                 <th>Product</th>
@@ -10,22 +11,22 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let product of products | keyvalue ">
-                <td class="text-center">{{product.value.name}}</td>
+            <tr *ngFor="let product of products" attr.id="prod-{{product.id}}">
+                <td class="text-center ">{{product.name}}</td>
                 <ng-template #emptytD>
                     <td></td>
                 </ng-template>
-                <td *ngIf="product.value.bids.length >0 ; else emptytD">
+                <td *ngIf="product.bids.length >0 ; else emptytD">
                     <select class="form-control">
-                    <option *ngFor="let bid of product.value.bids | keyvalue"  value="bid.value.id">{{bid.value.price}}</option>
+                    <option *ngFor="let bid of product.bids"  value="bid.id">{{bid.price}}</option>
                 </select>
                 </td>
                 <td>
-                    <div class="input-group">
+                    <div class="input-group place-bid">
                         <input type="text" #prodInp [className]="!canBidPlace && product.value.id==currProdId && prodInp.value!='' ? 'border border-danger' : '' ">
                         <i [className]="!canBidPlace && product.value.id==currProdId && prodInp.value!='' ? 'd-inline-block fa fa-exclamation-circle ' : 'd-none'" aria-hidden="true " placement="top" ngbTooltip="You can't add this bid"></i>
                         <span class=" input-group-btn ">
-                      <button class="btn btn-primary btn-gap " (click)="save(prodInp,product.value.bids,product) ">Place Bid</button>
+                      <button class="btn btn-primary btn-gap " (click)="save(prodInp,product.bids,product) ">Place Bid</button>
                   </span>
 
                     </div>

@@ -31,6 +31,7 @@ export class AuthService {
     if(!token){
       token=this.getAccessToken();
     }
+    console.log("decode");
     let decode_token=jwt_decode(token);
     return decode_token;
   }

@@ -2,3 +2,13 @@
 
 @import "~bootstrap/dist/css/bootstrap.css";
 @import '~font-awesome/css/font-awesome.min.css';
+@import "variables.scss";
+.table-bordered,
+.table-bordered td,
+.table-bordered th {
+    border: 2px solid steelblue !important;
+}
+
+body {
+    background-color: $primaryBackgroundColor;
+}
